@@ -4,20 +4,21 @@ import Header from "../components/repareo/header";
 import MainWrapper from "../components/repareo/mainWrapper";
 import StepperWrapper from "../components/repareo/stepperWrapper";
 import Stepper from "../components/stepper/stepper";
-import useStepper from "../hooks/useStepper";
+import {steps} from '../components/stepper/steps';
+import {useStepper} from '../hooks/useStepper';
 
 export default function Home() {
-	const { currentStep, handleNextStep } = useStepper();
+	const { currentStep, handleNextStep, isLastStep} = useStepper(steps);
 	return (
 		<>
 			<Header />
 			<MainWrapper>
 				<StepperWrapper>
 					{/*TODO: Make sure the Stepper handles clicks on the button*/}
-					<Stepper />
+					<Stepper steps={steps} currentStep={currentStep}/>
 				</StepperWrapper>
 				<ButtonWrapper>
-					<Button onClick={handleNextStep}>Next</Button>
+					<Button isHidden={isLastStep} onClick={handleNextStep}>Next</Button>
 				</ButtonWrapper>
 			</MainWrapper>
 		</>
